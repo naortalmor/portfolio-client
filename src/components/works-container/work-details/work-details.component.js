@@ -22,6 +22,7 @@ export default class WorkDetails extends React.Component {
                 <div className="work-data col">
                     <div className="work-header">{this.props.work.header}</div>
                     <div className="work-description">{this.props.work.description}</div>
+                    <div className="work-data-details">{this.props.work.details}</div>
                     <FontAwesomeIcon icon={faTimesCircle} 
                                      onClick={this.close} 
                                      className="close-selected" />

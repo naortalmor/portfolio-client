@@ -67,16 +67,18 @@ export default class WorksContainer extends React.Component {
     render() {
         const images = this.worksMap[this.state.activeIndicator].map((work) => 
         <MinimzedWork work={work} 
-            key={work + Math.random()} 
+            key={work.id} 
             displayWork={() => this.displaySelectedWork(work)}/>
         );
         
         return (
-            <div className="col container" style={{padding: '2em'}}>
+            <div className="col container">
                 <ScrollIndicator indicatorsCount={this.pagesCount} activeIndicator={this.state.activeIndicator}/>
                 <div className="images-container row">
-                    <FontAwesomeIcon icon={faArrowCircleLeft} onClick={this.prevWorks} className="icon flx1"/>    
-                    {images}
+                    <FontAwesomeIcon icon={faArrowCircleLeft} onClick={this.prevWorks} className="icon flx1"/>   
+                    <div className="row ctr flx25">
+                        {images}
+                    </div> 
                     <FontAwesomeIcon icon={faArrowCircleRight} onClick={this.nextWorks} className="icon flx1" />
                 </div>
                 {this.state.workToDisplay ? 

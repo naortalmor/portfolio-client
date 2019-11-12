@@ -16,7 +16,6 @@
 }
 
 .close-selected {
-    margin-top: 2em;
     font-size: xx-large;
     color: #bb5261;
     cursor: pointer;
@@ -31,5 +30,12 @@
 .work-description {
     font-size: larger;
     font-weight: 600;
+    color: #190202bf;
+}
+
+.work-data-details {
+    font-size: medium;
+    font-weight: 300;
+    padding: 15px;
     color: #190202bf;
 }
