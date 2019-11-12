@@ -1,22 +1,97 @@
-.App {
-  text-align: center;
+.app {
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.col {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.flx1 {
+  flex: 1;
+}
+
+.flx2 {
+  flex: 2;
+}
+
+.flx3 {
+  flex: 3;
+}
+
+.flx4 {
+  flex: 4;
+}
+
+.flx5 {
+  flex: 5;
+}
+
+.flx6 {
+  flex: 6;
+}
+
+.header {
+  align-items: center;
+  padding-left: 2em;
+  position: sticky;
+  background-color: black;
+  height: 4em;
+}
+
+.header-text {
+  color: #e97c8b;
+  font-weight: bold;
+}
+
+.main-img {
+  border-radius: 200px;
+  margin: 2% 5%;
+  height: 100%;
+  width: 18%;
+  object-fit: cover;
+}
+
+.container {
+  margin: 2em;
+}
+
+.images-container {
+  overflow: hidden;  
+  align-items: center;
+  align-self: center;
+  padding: 2em;
+  width: 95%;
+}
+
+.scroll {
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll-indicator {
+  width: 5vh;
+  height: 3px;
+  margin: 1px;
+  background-color: #d89191;
+}
+
+.activeIndicator {
+  background-color: black;
+}
+
+.icon {
+  align-self: center;
+    font-size: 2em;
+    color: #d89191;
+    cursor: pointer;
+}
+
+.icon:hover {
+  color: #c13c3c;
 }

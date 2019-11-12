@@ -1,0 +1,35 @@
+.work-details {
+    height: 80vh;
+    margin: 3em auto;
+    border-radius: 10px;
+    padding: 1em;
+  }
+
+.work-image {
+    height: 70vh;
+    border-radius: 30px;
+}
+
+.work-data {
+    align-items: center;
+    margin-top: 1em;
+}
+
+.close-selected {
+    margin-top: 2em;
+    font-size: xx-large;
+    color: #bb5261;
+    cursor: pointer;
+}
+
+.work-header {
+    font-size: xx-large;
+    font-weight: bolder;
+    color: #8a3c47;
+}
+
+.work-description {
+    font-size: larger;
+    font-weight: 600;
+    color: #190202bf;
+}

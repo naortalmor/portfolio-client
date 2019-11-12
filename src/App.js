@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/header/header.component';
+import OwnerData from './components/owner-data/owner-data.component';
+import WorksContainer from './components/works-container/works-container.component';
+import {allWorksMock} from './mocks/works.mock'
 
 function App() {
+  let maximuxWorksOnScroll = 3;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <OwnerData />
+      <WorksContainer allWorks={allWorksMock} maxWorks={maximuxWorksOnScroll} />
     </div>
   );
 }
