@@ -5,6 +5,7 @@ import { faArrowCircleRight, faArrowCircleLeft } from '@fortawesome/free-solid-s
 import MinimzedWork from './minimized-work/minimized-work.component';
 import ScrollIndicator from './scroll-indicator/scroll-indicator.component';
 import WorkDetails from './work-details/work-details.component';
+import * as firebase from 'firebase';
 
 export default class WorksContainer extends React.Component {
     worksMap = [];
@@ -46,6 +47,12 @@ export default class WorksContainer extends React.Component {
         for (let index = 0; index < this.props.allWorks.length ; index+=this.props.maxWorks) {
             this.worksMap.push(this.props.allWorks.slice(index, index+this.props.maxWorks));
         }
+
+        const database = firebase.database();
+        let allWorks = database.ref('/works');
+        allWorks.once('value').then(allWorks => {
+            this.allWorks = [...this.allWorks, ...allWorks]
+        })
     }
 
     nextWorks() {
