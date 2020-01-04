@@ -5,11 +5,8 @@ import { faArrowCircleRight, faArrowCircleLeft } from '@fortawesome/free-solid-s
 import MinimzedWork from './minimized-work/minimized-work.component';
 import ScrollIndicator from './scroll-indicator/scroll-indicator.component';
 import WorkDetails from './work-details/work-details.component';
-import * as firebase from 'firebase';
 
 export default class WorksContainer extends React.Component {
-    worksMap = [];
-    pagesCount;
     workDetailsComponent;
 
     constructor(props) {
@@ -42,23 +39,10 @@ export default class WorksContainer extends React.Component {
         }, 1000);
     }
 
-    componentWillMount() {
-        this.pagesCount = Math.round(this.props.allWorks.length / this.props.maxWorks);
-        for (let index = 0; index < this.props.allWorks.length ; index+=this.props.maxWorks) {
-            this.worksMap.push(this.props.allWorks.slice(index, index+this.props.maxWorks));
-        }
-
-        const database = firebase.database();
-        let allWorks = database.ref('/works');
-        allWorks.once('value').then(allWorks => {
-            this.allWorks = [...this.allWorks, ...allWorks]
-        })
-    }
-
     nextWorks() {
         this.setState((prev) => {
             return {
-                activeIndicator: prev.activeIndicator === this.pagesCount -1 ? 0 : prev.activeIndicator + 1
+                activeIndicator: prev.activeIndicator === this.props.pagesCount -1 ? 0 : prev.activeIndicator + 1
             }
         })
     }
@@ -66,21 +50,21 @@ export default class WorksContainer extends React.Component {
     prevWorks() {
         this.setState((prev) => {
             return {
-                activeIndicator: prev.activeIndicator === 0 ? this.pagesCount - 1 : prev.activeIndicator - 1
+                activeIndicator: prev.activeIndicator === 0 ? this.props.pagesCount - 1 : prev.activeIndicator - 1
             }
         })
     }
 
     render() {
-        const images = this.worksMap[this.state.activeIndicator].map((work) => 
+        const images = this.props.worksMap[this.state.activeIndicator] ? this.props.worksMap[this.state.activeIndicator].map((work) => 
         <MinimzedWork work={work} 
             key={work.id} 
             displayWork={() => this.displaySelectedWork(work)}/>
-        );
+        ) : [];
         
         return (
             <div className="col container">
-                <ScrollIndicator indicatorsCount={this.pagesCount} activeIndicator={this.state.activeIndicator}/>
+                <ScrollIndicator indicatorsCount={this.props.pagesCount} activeIndicator={this.state.activeIndicator}/>
                 <div className="images-container row">
                     <FontAwesomeIcon icon={faArrowCircleLeft} onClick={this.prevWorks} className="icon flx1"/>   
                     <div className="row ctr flx25">

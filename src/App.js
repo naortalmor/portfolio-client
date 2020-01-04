@@ -3,21 +3,50 @@ import './App.css';
 import Header from './components/header/header.component';
 import OwnerData from './components/owner-data/owner-data.component';
 import WorksContainer from './components/works-container/works-container.component';
-import {allWorksMock} from './mocks/works.mock'
-import Firebase, { FirebaseContext } from './services/firebase/index'
+import Firebase from './services/firebase/firebase'
+import * as firebase from 'firebase';
 
-function App() {
-  let maximuxWorksOnScroll = 3;
+export default class App extends React.Component {
+  maximuxWorksOnScroll = 3;
 
-  return (
-    <FirebaseContext.Provider value={new Firebase()}>
+  constructor() {
+    super();
+    new Firebase();
+
+    this.state = {
+      worksMap: [],
+      pagesCount: 0
+    }
+  }
+  
+  getAllWorks() {
+    firebase.database().ref('/works').on('value', data => {
+      let dbDataValue = Object.values(data.val());
+      let works = []
+      for (let index = 0; index < dbDataValue.length ; index+=this.maximuxWorksOnScroll) {
+        works.push(dbDataValue.slice(index, index+this.maximuxWorksOnScroll));
+    }
+      this.setState({
+        pagesCount: Math.round(dbDataValue.length / this.maximuxWorksOnScroll),
+        worksMap: works
+      });
+    })
+  }
+
+  componentDidMount() {
+    this.getAllWorks();
+
+  }
+
+  render() {
+    return (
         <div className="App">
-        <Header />
-        <OwnerData />
-        <WorksContainer allWorks={allWorksMock} maxWorks={maximuxWorksOnScroll} />
-      </div>
-    </FirebaseContext.Provider>
-  );
+          <Header />
+          <OwnerData />
+          <WorksContainer 
+            worksMap={this.state.worksMap} 
+            pagesCount={this.state.pagesCount} />
+        </div>
+    );
+  }
 }
-
-export default App;
